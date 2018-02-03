@@ -1,11 +1,40 @@
 {
-  "name": "Crappy Clippy",
-  "version": "1.0.0",
-    "dependencies": {
-      "angular": "1.2.6",
-      "jquery": "2.0.3",
-      "normalize.scss": "3.0.0"
+  "manifest_version": 2,
+  "name": "CrappyClippy",
+  "version": "0",
+  "version_name": "paperclip",
+  "description": "Manage tabs in Google Chrome",
+  "icons": {
+    "32": "img/icon32.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "32": "img/icon32.png"
     },
-
-  "devDependencies": {}
+    "default_title": "Tab Buddy",
+    "default_popup": "popup.html"
+  },
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "incognito": "not_allowed",
+  "permissions": [
+    "activeTab",
+    "background",
+    "debugger",
+    "management",
+    "notifications",
+    "storage",
+    "system.cpu",
+    "system.memory",
+    "tabCapture",
+    "tabs"
+  ],
+  "web_accessible_resources": [
+    "css/*",
+    "img/*",
+    "js/*",
+    "index.html",
+    "popup.html"
+  ]
 }
