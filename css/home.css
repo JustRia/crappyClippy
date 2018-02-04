@@ -1,0 +1,76 @@
+body {
+    background: url("../img/notebook_paper.jpg");
+    background-repeat: repeat-y;
+    overflow:hidden;
+}
+.title {
+  display:block;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  color:black;
+  font-size: 60px;
+  text-align: center;
+  line-height: 100px;
+  margin-top: 50px;
+}
+img {
+    display:block;
+    opacity: 0.5;
+    height: 30%;
+    width: 30%;
+    float: right;
+}
+.input-wrapper {
+    margin-top: 62px;
+    margin-left: 50px;
+    text-align: center;
+}
+
+input{
+    border: 2px solid #71a8d6;
+    padding: 10px;
+    margin-top: 10px;
+    height: 15px;
+    width: 500px;
+    border-radius: 20px;
+}
+input:hover{
+    border-color: #4d90fe;
+}
+input:focus{
+    border-color:#1a75ff;
+}
+
+input[type="submit"] {
+    border-radius: 2px;
+    background: #f2f2f2;
+    border: 1px solid #f2f2f2;
+    color: #757575;
+    cursor: default;
+    font-size: 14px;
+    font-weight: bold;
+    width: 100px;
+    padding: 0 16px;
+    height:36px;
+}
+input[type="submit"]:hover {
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    background: #f8f8f8;
+    border: 1px solid #c6c6c6;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    color: #222;
+}
+
+.input:before {
+  width: 30; 
+  height: 30; 
+  border-top: 2px #71a8d6;
+  border-bottom: 2px #71a8d6; 
+  border-right:10px solid white; 
+}
+
+.tab-groups {
+    margin-top: 37px;
+    text-align: center;
+    font-size: 28px;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+}
