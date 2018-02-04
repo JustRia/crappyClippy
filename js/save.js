@@ -1,4 +1,4 @@
-var saveButton = document.querySelector("button.save");
+var saveButton = document.querySelector('button.save');
 saveButton.addEventListener('click', save)
 function save() {
     var targetWindow = null;
