@@ -14,3 +14,8 @@ div.option {
 div.option:hover {
   background-color: lightgray;
 }
+
+i {
+  margin-left: 8px;
+  margin-right: 8px;
+}
