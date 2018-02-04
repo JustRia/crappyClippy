@@ -1,0 +1,16 @@
+body {
+  min-width: 256px;
+  margin: 0px;
+}
+
+div.option {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 10pt;
+  margin: 0px;
+  border-bottom: 2px solid lightgray;
+  cursor: pointer;
+}
+
+div.option:hover {
+  background-color: lightgray;
+}
