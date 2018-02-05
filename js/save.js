@@ -6,7 +6,7 @@ function save() {
     start();
     function start() {
         const obj = {
-          "populate": true
+            "populate": true
         };
         //Returns calls getTabs(currentWindow) where current Window has a tabs property
         chrome.windows.getCurrent(obj, getTabs);
@@ -14,6 +14,7 @@ function save() {
     }
     function getTabs(win) {
         var storage = chrome.storage.local;
+        window.open(chrome.extension.getURL("popup.html"), "gc-popout-window", "width=348,height=654")
         var setName = window.prompt("Rename your tab set if you want", "My Tab Set");
         if (setName == null) {
             return;
@@ -28,7 +29,7 @@ function save() {
             set.tabs.push(tab);
         }
         storage.set(set, function callback() {
-            alert(set.name + " Saved");
+            alert(set.tabs + " Saved");
         })
     }
 }
