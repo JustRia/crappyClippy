@@ -3,10 +3,8 @@ saveButton.addEventListener('click', save)
 function save() {
     var targetWindow = null;
     var tabCount = 0;
-    alert("save");
     start();
     function start() {
-        alert("start");
         const obj = {
           "populate": true
         };
@@ -16,14 +14,21 @@ function save() {
     }
     function getTabs(win) {
         var storage = chrome.storage.local;
-        alert("getTabs");
+        var setName = window.prompt("Rename your tab set if you want", "My Tab Set");
+        if (setName == null) {
+            return;
+        }
+        var set = {
+            "name": setName,
+            "tabs": []
+        };
         tabCount = win.tabs.length;
-        console.log(win.tabs.length);
         for (var i = 0; i < tabCount; i++) {
             var tab = win.tabs[i];
-            storage.set({ 'title': tab.title, 'url': tab.url }, function () {
-                alert(tab.title + 'saved')
-            });
+            set.tabs.push(tab);
         }
+        storage.set(set, function callback() {
+            alert(set.name + " Saved");
+        })
     }
 }
