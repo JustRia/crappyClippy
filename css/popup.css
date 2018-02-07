@@ -32,3 +32,21 @@ button.save {
   padding: 4px;
   cursor: pointer;
 }
+
+ul.tabList {
+  font-family: 'Comic Sans MS',cursive, sans-serif;
+  font-size: 10pt;
+  list-style-type: none;
+  list-style-position: inside;
+  margin: 8px 8px;
+  padding: 0px;
+}
+
+li.tab {
+  cursor: pointer;
+  border-bottom: 2px solid lightgray;
+}
+
+li.tab.selected {
+  background-color: lightgray;
+}
