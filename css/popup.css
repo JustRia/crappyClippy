@@ -19,3 +19,16 @@ i {
   margin-left: 8px;
   margin-right: 8px;
 }
+
+#setName {
+  font-family: 'Comic Sans MS',cursive, sans-serif;
+  font-size: 10pt;
+  padding: 4px;
+}
+
+button.save {
+  font-family: 'Comic Sans MS',cursive, sans-serif;
+  font-size: 10pt;
+  padding: 4px;
+  cursor: pointer;
+}

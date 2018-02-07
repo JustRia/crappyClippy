@@ -4,6 +4,60 @@ var backButton = document.querySelector('div.home');
 backButton.addEventListener('click', function callback() {
     window.location.href = "../popup.html"
 });
+
+populateTabs();
+
+function populateTabs() {
+    var targetWindow = null;
+    var tabCount = 0;
+    start();
+    function start() {
+        const obj = {
+            "populate": true
+        };
+        //Returns calls getTabs(currentWindow) where current Window has a tabs property
+        chrome.windows.getCurrent(obj, getTabs);
+
+    }
+    function getTabs(win) {
+        var storage = chrome.storage.local;
+        //window.open(chrome.extension.getURL("popup.html"), "gc-popout-window", "width=348,height=654")
+        //var setName = window.prompt("Rename your tab set if you want", "My Tab Set");
+        setName = document.querySelector("input#setName").value;
+        if (setName == null) {
+            return;
+        }
+        console.log(setName);
+        var set = {
+            "name": setName,
+            "tabs": []
+        };
+        tabCount = win.tabs.length;
+        var tabList = document.querySelector(".tabList");
+        for (var i = 0; i < tabCount; i++) {
+            var tab = win.tabs[i];
+            var li = document.createElement("li");
+            li.setAttribute("class", "tab");
+            li.setAttribute("url", tab.url);
+            li.setAttribute("id", tab.id);
+            li.appendChild(document.createTextNode(tab.title));
+            li.addEventListener('click', (e) => toggleSelected(e))
+            tabList.appendChild(li);
+        }
+        console.log(set);
+        
+    }
+}
+
+function toggleSelected(e) {
+    const li = e.target;
+    if (li.classList.contains("selected")) {
+        li.classList.remove("selected");
+    } else {
+        li.classList.add("selected");
+    }
+}
+
 function save() {
     var targetWindow = null;
     var tabCount = 0;
