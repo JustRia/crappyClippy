@@ -1,5 +1,9 @@
 var saveButton = document.querySelector('button.save');
 saveButton.addEventListener('click', save);
+var backButton = document.querySelector('div.home');
+backButton.addEventListener('click', function callback() {
+  window.location.href = "../popup.html"
+});
 function save() {
     var targetWindow = null;
     var tabCount = 0;
