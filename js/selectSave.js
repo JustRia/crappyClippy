@@ -45,7 +45,7 @@ function populateTabs() {
             tabList.appendChild(li);
         }
         console.log(set);
-        
+
     }
 }
 
@@ -59,18 +59,9 @@ function toggleSelected(e) {
 }
 
 function save() {
-    var targetWindow = null;
     var tabCount = 0;
-    start();
-    function start() {
-        const obj = {
-            "populate": true
-        };
-        //Returns calls getTabs(currentWindow) where current Window has a tabs property
-        chrome.windows.getCurrent(obj, getTabs);
-
-    }
-    function getTabs(win) {
+    getTabs();
+    function getTabs() {
         var storage = chrome.storage.local;
         //window.open(chrome.extension.getURL("popup.html"), "gc-popout-window", "width=348,height=654")
         //var setName = window.prompt("Rename your tab set if you want", "My Tab Set");
@@ -83,10 +74,17 @@ function save() {
             "name": setName,
             "tabs": []
         };
-        tabCount = win.tabs.length;
+        tabCount = document.getElementById("tabList").children.length;
+        var child;
         for (var i = 0; i < tabCount; i++) {
-            var tab = win.tabs[i];
-            set.tabs.push(tab);
+            child = document.getElementById("tabList").children[i];
+            if (child.classList.contains("selected")) {
+                var tab = {
+                    "title": child.textContent,
+                    "url": child.getAttribute("url")
+                };
+                set.tabs.push(tab);
+            }
         }
         /*
         storage.set(set, function callback() {
@@ -94,19 +92,19 @@ function save() {
         })*/
 
         //Saving sets to an array called data saved to local storage
-        storage.get(null, function(items) {
+        storage.get(null, function (items) {
             if (Object.keys(items).length > 0 && items.data) {
                 // The data array already exists, add to it the new server and nickname
                 items.data.push(set);
             } else {
-              console.log("in here");
-              // The data array doesn't exist yet, create it
-              items.data = [set];
+                console.log("in here");
+                // The data array doesn't exist yet, create it
+                items.data = [set];
             }
             console.log(items);
             // Now save the updated items using set
-            chrome.storage.local.set(items, function() {
-              console.log('Data successfully saved to the storage!');
+            chrome.storage.local.set(items, function () {
+                console.log('Data successfully saved to the storage!');
             });
         });
 
@@ -115,6 +113,6 @@ function save() {
     }
 
     function backHome() {
-      window.location.href = "../popup.html"
+        window.location.href = "../popup.html"
     }
 }
