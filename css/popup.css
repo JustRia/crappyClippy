@@ -19,3 +19,21 @@ i {
   margin-left: 8px;
   margin-right: 8px;
 }
+
+div.setList {
+  font-family: 'Comic Sans MS',cursive, sans-serif;
+  font-size: 10pt;
+  list-style-type: none;
+  list-style-position: inside;
+  margin: 8px 8px;
+  padding: 0px;
+}
+
+div.set {
+  cursor: pointer;
+  border-bottom: 2px solid lightgray;
+}
+
+div.set.selected {
+  background-color: lightgray;
+}
