@@ -40,6 +40,10 @@ function populateTabs() {
             li.setAttribute("class", "tab");
             li.setAttribute("url", tab.url);
             li.setAttribute("id", tab.id);
+            var img = document.createElement("img");
+            img.setAttribute("src", tab.favIconUrl);
+            img.setAttribute("height", "16");
+            li.appendChild(img);
             li.appendChild(document.createTextNode(tab.title));
             li.addEventListener('click', (e) => toggleSelected(e))
             tabList.appendChild(li);
