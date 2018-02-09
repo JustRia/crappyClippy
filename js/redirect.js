@@ -1,3 +1,8 @@
+//At very beginning, remove selectedSet and editType from storage
+chrome.storage.local.remove(["selectedSet", "editType"], function() {
+  console.log('Removed selectedSet and editType from local storage');
+});
+
 var saveButton = document.querySelector('div.save');
 var saveSelectButton = document.querySelector('div.select-save');
 saveButton.addEventListener('click', saveRedirect);
