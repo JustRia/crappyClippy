@@ -51,12 +51,12 @@ function remove() {
   var storage = chrome.storage.local;
   storage.get(null, function(items) {
     if (Object.keys(items).length > 0 && items.data && items.data.length > 0) {
-      var newData = [];
+      var newData = items.data;
       var selected = 0;
       for (var i = 0; i < setCount; i++) {
         var element = document.querySelector("div.setList").children[i];
         if (element.classList.contains("selected")) {
-          newData = items.data.filter((e) => e.name !== element.textContent);
+          newData = newData.filter((e) => e.name !== element.textContent);
           selected++;
         }
       }
