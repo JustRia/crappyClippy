@@ -2,6 +2,12 @@ var selectedSet;
 if (window.location.pathname === '/edit.html') {
   listSets();
 }
+else if (window.location.pathname === '/editOptions.html') {
+  var editName = document.querySelector('div.rename');
+  var addTabs = document.querySelector('div.add-tabs');
+  var removeTabs = document.querySelector('div.remove-tabs');
+}
+
 
 function createNode(element) {
     return document.createElement(element);
