@@ -208,8 +208,13 @@ function removeFromSet() {
           setToEdit.tabs = setToEdit.tabs.filter((e) => e.title !== child.innerHTML);
         }
       }
-      var index = items.data.findIndex((e) => e.name === setToEdit.name);
-      items.data[index] = setToEdit;
+      if (setToEdit.tabs.length == 0) {
+        items.data = items.data.filter((e) => e.name !== setToEdit.name);
+        console.log(items.data);
+      } else {
+        var index = items.data.findIndex((e) => e.name === setToEdit.name);
+        items.data[index] = setToEdit;
+      }
       chrome.storage.local.set(items, function() {
         console.log('Data successfully saved to the storage!');
       });
