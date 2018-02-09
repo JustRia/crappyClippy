@@ -149,6 +149,38 @@ function addToSet() {
     button.setAttribute('class', 'save');
     button.innerHTML = 'Save Changes';
     append(div, button);
+    let allButton = createNode('button');
+    allButton.setAttribute('class', 'save');
+    allButton.innerHTML = 'Add all';
+    append(div, allButton);
+    allButton.addEventListener('click', function() {
+      console.log(document.querySelector('div.fill').children);
+      var childCount = document.querySelector('div.fill').children.length;
+      chrome.storage.local.get(null, function(items) {
+        var setToEdit = items.data.filter((e) => e.name === items.selectedSet.name)[0];
+        var child;
+        for (var i = 0; i < childCount; i++) {
+          child = document.querySelector('div.tabList').children[i];
+          console.log(child);
+          if (child.tagName == 'LI') {
+            var tab = {
+              "title": child.textContent,
+              "url": child.getAttribute("url")
+            };
+            setToEdit.tabs.push(tab);
+          }
+        }
+        var index = items.data.findIndex((e) => e.name === setToEdit.name);
+        items.data[index] = setToEdit;
+        chrome.storage.local.set(items, function() {
+          console.log('Data successfully saved to the storage!');
+        });
+        chrome.storage.local.remove(["selectedSet", "editType"], function() {
+          console.log('Removed selectedSet and editType from local storage');
+        });
+        window.location.href = '../popup.html';
+      });
+    });
     button.addEventListener('click', function() {
       console.log(document.querySelector('div.fill').children);
       var childCount = document.querySelector('div.fill').children.length;
