@@ -1,4 +1,3 @@
-var editType = 0;  //Type of edit to perform. 0, 1, 2 for name, add, remove
 if (window.location.pathname === '/edit.html') {
   var backButton = document.querySelector('div.home');
   backButton.addEventListener('click', function callback() {
@@ -12,22 +11,22 @@ else if (window.location.pathname === '/editOptions.html') {
   var removeTabs = document.querySelector('div.remove-tabs');
   var backButton = document.querySelector('div.home');
   backButton.addEventListener('click', function callback() {
-    chrome.storage.local.remove("selectedSet", function() {
-      console.log('Removed selectedSet from local storage');
+    chrome.storage.local.remove(["selectedSet", "editType"], function() {
+      console.log('Removed selectedSet and editType from local storage');
     });
     window.location.href = "../edit.html"
   });
 
   editName.addEventListener('click', function() {
-    editType = 0;
+    chrome.storage.local.set({'editType': 0});
     window.location.href = '../performEdits.html';
   });
   addTabs.addEventListener('click', function() {
-    editType = 1;
+    chrome.storage.local.set({'editType': 1});
     window.location.href = '../performEdits.html';
   });
   removeTabs.addEventListener('click', function() {
-    editType = 2;
+    chrome.storage.local.set({'editType': 2});
     window.location.href = '../performEdits.html';
   });
 }
@@ -36,19 +35,26 @@ else {
   backButton.addEventListener('click', function callback() {
     window.location.href = "../editOptions.html"
   });
-  if (editType == 0) {
-    editSetName();
-  }
-  else if (editType == 1) {
-    addToSet();
-  }
-  else {
-    removeFromSet();
-  }
+  chrome.storage.local.get('editType', function (e) {
+    if (e.editType == 0) {
+      editSetName();
+    }
+    else if (e.editType == 1) {
+      addToSet();
+    }
+    else {
+      removeFromSet();
+    }
+  });
 }
 
-function setSet(set) {
-  selectedSet = set;
+function toggleSelected(e) {
+    const li = e.target;
+    if (li.classList.contains("selected")) {
+        li.classList.remove("selected");
+    } else {
+        li.classList.add("selected");
+    }
 }
 
 function createNode(element) {
@@ -113,8 +119,58 @@ function editSetName() {
       chrome.storage.local.remove("selectedSet", function() {
         console.log('Removed selectedSet from local storage');
       });
-      setTimeout(200);
       window.location.href = '../popup.html';
     })
+  });
+}
+
+function addToSet() {
+  var div = document.querySelector('div.fill');
+  div.className += ' tabList';
+  chrome.windows.getCurrent({'populate': true}, function(win) {
+    tabCount = win.tabs.length;
+    var tabList = document.querySelector(".tabList");
+    for (var i = 0; i < tabCount; i++) {
+      var tab = win.tabs[i];
+      var li = document.createElement("li");
+      li.setAttribute("class", "tab");
+      li.setAttribute("url", tab.url);
+      li.setAttribute("id", tab.id);
+      li.appendChild(document.createTextNode(tab.title));
+      li.addEventListener('click', (e) => toggleSelected(e))
+      div.appendChild(li);
+    }
+    let button = createNode('button');
+    button.setAttribute('class', 'save');
+    button.innerHTML = 'Save Changes';
+    append(div, button);
+    button.addEventListener('click', function() {
+    console.log(document.querySelector('div.fill').children);
+    var childCount = document.querySelector('div.fill').children.length;
+    chrome.storage.local.get(null, function(items) {
+      var setToEdit = items.data.filter((e) => e.name === items.selectedSet.name)[0];
+      var child;
+      for (var i = 0; i < childCount; i++) {
+        child = document.querySelector('div.tabList').children[i];
+        if (child.classList.contains("selected")) {
+          var tab = {
+            "title": child.textContent,
+            "url": child.getAttribute("url")
+          };
+          setToEdit.tabs.push(tab);
+        }
+      }
+      console.log(setToEdit);
+      var index = items.data.findIndex((e) => e.name === setToEdit.name);
+      items.data[index] = setToEdit;
+      chrome.storage.local.set(items, function () {
+          console.log('Data successfully saved to the storage!');
+      });
+      chrome.storage.local.remove(["selectedSet", "editType"], function() {
+        console.log('Removed selectedSet and editType from local storage');
+      });
+      window.location.href = '../popup.html';
+      });
+    });
   });
 }
