@@ -126,7 +126,7 @@ function editSetName() {
 
 function addToSet() {
   var div = document.querySelector('div.fill');
-  div.className += ' tabList';
+   div.className += ' tabList';
   chrome.windows.getCurrent({'populate': true}, function(win) {
     tabCount = win.tabs.length;
     var tabList = document.querySelector(".tabList");
@@ -145,31 +145,31 @@ function addToSet() {
     button.innerHTML = 'Save Changes';
     append(div, button);
     button.addEventListener('click', function() {
-    console.log(document.querySelector('div.fill').children);
-    var childCount = document.querySelector('div.fill').children.length;
-    chrome.storage.local.get(null, function(items) {
-      var setToEdit = items.data.filter((e) => e.name === items.selectedSet.name)[0];
-      var child;
-      for (var i = 0; i < childCount; i++) {
-        child = document.querySelector('div.tabList').children[i];
-        if (child.classList.contains("selected")) {
-          var tab = {
-            "title": child.textContent,
-            "url": child.getAttribute("url")
-          };
-          setToEdit.tabs.push(tab);
+      console.log(document.querySelector('div.fill').children);
+      var childCount = document.querySelector('div.fill').children.length;
+      chrome.storage.local.get(null, function(items) {
+        var setToEdit = items.data.filter((e) => e.name === items.selectedSet.name)[0];
+        var child;
+        for (var i = 0; i < childCount; i++) {
+          child = document.querySelector('div.tabList').children[i];
+          if (child.classList.contains("selected")) {
+            var tab = {
+              "title": child.textContent,
+              "url": child.getAttribute("url")
+            };
+            setToEdit.tabs.push(tab);
+          }
         }
-      }
-      console.log(setToEdit);
-      var index = items.data.findIndex((e) => e.name === setToEdit.name);
-      items.data[index] = setToEdit;
-      chrome.storage.local.set(items, function () {
+        console.log(setToEdit);
+        var index = items.data.findIndex((e) => e.name === setToEdit.name);
+        items.data[index] = setToEdit;
+        chrome.storage.local.set(items, function () {
           console.log('Data successfully saved to the storage!');
-      });
-      chrome.storage.local.remove(["selectedSet", "editType"], function() {
-        console.log('Removed selectedSet and editType from local storage');
-      });
-      window.location.href = '../popup.html';
+        });
+        chrome.storage.local.remove(["selectedSet", "editType"], function() {
+          console.log('Removed selectedSet and editType from local storage');
+        });
+        window.location.href = '../popup.html';
       });
     });
   });
