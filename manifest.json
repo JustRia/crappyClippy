@@ -36,5 +36,16 @@
     "js/*",
     "index.html",
     "popup.html"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/save.js"
+      ]
+    }
   ]
 }

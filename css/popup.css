@@ -1,0 +1,70 @@
+body {
+  min-width: 256px;
+  margin: 0px;
+}
+
+div.option {
+  font-family: 'Comic Sans MS',cursive, sans-serif;
+  font-size: 10pt;
+  margin: 0px;
+  border-bottom: 2px solid lightgray;
+  cursor: pointer;
+}
+
+div.option:hover {
+  background-color: lightgray;
+}
+
+i {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+div.setList {
+  font-family: 'Comic Sans MS',cursive, sans-serif;
+  font-size: 10pt;
+  list-style-type: none;
+  list-style-position: inside;
+  margin: 8px 8px;
+  padding: 0px;
+}
+
+#setName {
+  font-family: 'Comic Sans MS',cursive, sans-serif;
+  font-size: 10pt;
+  padding: 4px;
+}
+
+button.save {
+  font-family: 'Comic Sans MS',cursive, sans-serif;
+  font-size: 10pt;
+  padding: 4px;
+  cursor: pointer;
+}
+
+ul.tabList {
+  font-family: 'Comic Sans MS',cursive, sans-serif;
+  font-size: 10pt;
+  list-style-type: none;
+  list-style-position: inside;
+  margin: 8px 8px;
+  padding: 0px;
+}
+
+div.set {
+  cursor: pointer;
+  border-bottom: 2px solid lightgray;
+}
+
+li.tab {
+  cursor: pointer;
+  border-bottom: 2px solid lightgray;
+}
+
+div.set.selected {
+  background-color: lightgray;
+}
+
+li.tab.selected {
+  background-color: lightgray;
+}
