@@ -8,6 +8,11 @@ var editButton = document.querySelector('div.edit');
 removeButton.addEventListener('click', removeRedirect);
 editButton.addEventListener('click', editRedirect);
 
+var surprise = document.querySelector('div.surprise');
+surprise.addEventListener('click', function() {
+  window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+})
+
 function saveRedirect() {
   window.location.href = "../save.html"
 }
