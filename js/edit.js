@@ -178,3 +178,45 @@ function addToSet() {
     });
   });
 }
+
+function removeFromSet() {
+  var div = document.querySelector('div.fill');
+  div.className += ' tabList';
+  chrome.storage.local.get(null, function(items) {
+    var setToEdit = items.data.filter((e) => e.name === items.selectedSet.name)[0];
+    tabCount = setToEdit.tabs.length;
+    for (var i = 0; i < tabCount; i++) {
+      var tab = setToEdit.tabs[i];
+      var li = document.createElement("li");
+      li.setAttribute("class", "tab");
+      li.setAttribute("url", tab.url);
+      li.setAttribute("id", tab.id);
+      li.appendChild(document.createTextNode(tab.title));
+      li.addEventListener('click', (e) => toggleSelected(e))
+      div.appendChild(li);
+    }
+    let button = createNode('button');
+    button.setAttribute('class', 'save');
+    button.innerHTML = 'Save Changes';
+    append(div, button);
+    button.addEventListener('click', function() {
+      var childCount = document.querySelector('div.fill').children.length;
+      var child;
+      for (var i = 0; i < childCount; i++) {
+        child = document.querySelector('div.tabList').children[i];
+        if (child.classList.contains("selected")) {
+          setToEdit.tabs = setToEdit.tabs.filter((e) => e.title !== child.innerHTML);
+        }
+      }
+      var index = items.data.findIndex((e) => e.name === setToEdit.name);
+      items.data[index] = setToEdit;
+      chrome.storage.local.set(items, function() {
+        console.log('Data successfully saved to the storage!');
+      });
+      chrome.storage.local.remove(["selectedSet", "editType"], function() {
+        console.log('Removed selectedSet and editType from local storage');
+      });
+      window.location.href = '../popup.html';
+    });
+  });
+}
