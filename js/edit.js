@@ -4,8 +4,7 @@ if (window.location.pathname === '/edit.html') {
     window.location.href = "../popup.html"
   });
   listSets();
-}
-else if (window.location.pathname === '/editOptions.html') {
+} else if (window.location.pathname === '/editOptions.html') {
   var editName = document.querySelector('div.rename');
   var addTabs = document.querySelector('div.add-tabs');
   var removeTabs = document.querySelector('div.remove-tabs');
@@ -18,47 +17,51 @@ else if (window.location.pathname === '/editOptions.html') {
   });
 
   editName.addEventListener('click', function() {
-    chrome.storage.local.set({'editType': 0});
+    chrome.storage.local.set({
+      'editType': 0
+    });
     window.location.href = '../performEdits.html';
   });
   addTabs.addEventListener('click', function() {
-    chrome.storage.local.set({'editType': 1});
+    chrome.storage.local.set({
+      'editType': 1
+    });
     window.location.href = '../performEdits.html';
   });
   removeTabs.addEventListener('click', function() {
-    chrome.storage.local.set({'editType': 2});
+    chrome.storage.local.set({
+      'editType': 2
+    });
     window.location.href = '../performEdits.html';
   });
-}
-else {
+
+} else {
   var backButton = document.querySelector('div.home');
   backButton.addEventListener('click', function callback() {
     window.location.href = "../editOptions.html"
   });
-  chrome.storage.local.get('editType', function (e) {
+  chrome.storage.local.get('editType', function(e) {
     if (e.editType == 0) {
       editSetName();
-    }
-    else if (e.editType == 1) {
+    } else if (e.editType == 1) {
       addToSet();
-    }
-    else {
+    } else {
       removeFromSet();
     }
   });
 }
 
 function toggleSelected(e) {
-    const li = e.target;
-    if (li.classList.contains("selected")) {
-        li.classList.remove("selected");
-    } else {
-        li.classList.add("selected");
-    }
+  const li = e.target;
+  if (li.classList.contains("selected")) {
+    li.classList.remove("selected");
+  } else {
+    li.classList.add("selected");
+  }
 }
 
 function createNode(element) {
-    return document.createElement(element);
+  return document.createElement(element);
 }
 
 function append(parent, el) {
@@ -74,7 +77,7 @@ function listSets() {
       div.innerHTML = "No Sets Saved";
       append(ul, div);
     }
-    items.data.map(function (set) {
+    items.data.map(function(set) {
       let div = createNode("div");
       div.setAttribute("class", "option set");
       div.innerHTML = set.name;
@@ -113,8 +116,8 @@ function editSetName() {
       items.selectedSet.name = input.value;
       newData.push(items.selectedSet);
       items.data = newData;
-      chrome.storage.local.set(items, function () {
-          console.log('Data successfully saved to the storage!');
+      chrome.storage.local.set(items, function() {
+        console.log('Data successfully saved to the storage!');
       });
       chrome.storage.local.remove("selectedSet", function() {
         console.log('Removed selectedSet from local storage');
@@ -126,8 +129,10 @@ function editSetName() {
 
 function addToSet() {
   var div = document.querySelector('div.fill');
-   div.className += ' tabList';
-  chrome.windows.getCurrent({'populate': true}, function(win) {
+  div.className += ' tabList';
+  chrome.windows.getCurrent({
+    'populate': true
+  }, function(win) {
     tabCount = win.tabs.length;
     var tabList = document.querySelector(".tabList");
     for (var i = 0; i < tabCount; i++) {
@@ -160,10 +165,9 @@ function addToSet() {
             setToEdit.tabs.push(tab);
           }
         }
-        console.log(setToEdit);
         var index = items.data.findIndex((e) => e.name === setToEdit.name);
         items.data[index] = setToEdit;
-        chrome.storage.local.set(items, function () {
+        chrome.storage.local.set(items, function() {
           console.log('Data successfully saved to the storage!');
         });
         chrome.storage.local.remove(["selectedSet", "editType"], function() {
