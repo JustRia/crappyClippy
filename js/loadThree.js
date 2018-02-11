@@ -16,7 +16,9 @@ function loadThree() {
       div.innerHTML = "No Sets To Open";
       append(ul, div);
     }
-    items.data.length = 3;
+    if (items.data.length > 3) {
+      items.data.length = 3;
+    }
 
     items.data.map(function(set) {
         let div = createNode("div");
