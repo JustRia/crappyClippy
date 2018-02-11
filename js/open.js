@@ -39,7 +39,14 @@ function listSets() {
       let div = createNode("div");
       div.setAttribute("class", "option set");
       div.innerHTML = set.name;
-      div.addEventListener('click', (e) => toggleSelected(e));
+      div.addEventListener('click', function(e) {
+        items.selectedSet = set;
+        toggleSelected(e);
+        chrome.storage.local.set(items, function() {
+          console.log('Data successfully saved to the storage!');
+        });
+        setTimeout(200);
+      });
       //append(div, p);
       append(ul, div);
     });
@@ -53,13 +60,8 @@ function open() {
     var tabCount = setToOpen.tabs.length;
     for (var i = 0; i < tabCount; i++) {
       var tab = setToOpen.tabs[i];
-      var li = document.createElement("li");
-      li.setAttribute("class", "tab");
-      li.setAttribute("url", tab.url);
-      li.setAttribute("id", tab.id);
-      chrome.tabs.create(li);
+      chrome.tabs.create({ url: tab.url });
     }
-
     setTimeout(backHome, 200);
   });
 
