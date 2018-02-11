@@ -57,10 +57,17 @@ function open() {
   storage.get(null, function(items) {
     var setToOpen = items.data.filter((e) => e.name === items.selectedSet.name)[0];
     var tabCount = setToOpen.tabs.length;
-    for (var i = 0; i < tabCount; i++) {
-      var tab = setToOpen.tabs[i];
-      chrome.tabs.create({ url: tab.url });
+    var newWid;
+    var urls = [setToOpen.tabs[0].url];
+    if(tabCount>1){
+        for (var i = 1; i < tabCount; i++) {
+            urls[i] = setToOpen.tabs[i].url;
+        }
     }
+    chrome.windows.create({url: urls}, function() {
+        
+    });
+    
     setTimeout(backHome, 200);
   });
 

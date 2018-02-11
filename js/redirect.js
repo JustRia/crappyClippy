@@ -10,6 +10,8 @@ saveSelectButton.addEventListener('click', selectSaveRedirect);
 
 var openButton = document.querySelector('div.open');
 openButton.addEventListener('click', openRedirect);
+var openWindowButton = document.querySelector('div.open-window');
+openWindowButton.addEventListener('click', openWindowRedirect);
 
 var removeButton = document.querySelector('div.remove');
 var editButton = document.querySelector('div.edit');
@@ -27,6 +29,10 @@ function saveRedirect() {
 
 function openRedirect() {
   window.location.href = "../open.html"
+}
+
+function openWindowRedirect() {
+  window.location.href = "../openWindow.html"
 }
 
 function editRedirect() {
