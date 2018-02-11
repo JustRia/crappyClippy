@@ -20,6 +20,15 @@ i {
   margin-right: 8px;
 }
 
+div.setList {
+  font-family: 'Comic Sans MS',cursive, sans-serif;
+  font-size: 10pt;
+  list-style-type: none;
+  list-style-position: inside;
+  margin: 8px 8px;
+  padding: 0px;
+}
+
 #setName {
   font-family: 'Comic Sans MS',cursive, sans-serif;
   font-size: 10pt;
@@ -33,7 +42,7 @@ button.save {
   cursor: pointer;
 }
 
-ul.tabList {
+.tabList {
   font-family: 'Comic Sans MS',cursive, sans-serif;
   font-size: 10pt;
   list-style-type: none;
@@ -42,9 +51,18 @@ ul.tabList {
   padding: 8px 8px;
 }
 
+div.set {
+  cursor: pointer;
+  border-bottom: 2px solid lightgray;
+}
+
 li.tab {
   cursor: pointer;
   border-bottom: 2px solid lightgray;
+}
+
+div.set.selected {
+  background-color: lightgray;
 }
 
 li.tab.selected {

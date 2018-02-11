@@ -5,11 +5,15 @@
   "version_name": "paperclip",
   "description": "Manage tabs in Google Chrome",
   "icons": {
-    "32": "img/icon32.png"
+    "32": "img/crappyClippy_32x32.png"
   },
   "browser_action": {
     "default_icon": {
-      "32": "img/icon32.png"
+      "32": "img/crappyClippy_32x32.png",
+      "64": "img/crappyClippy_64x64.png",
+      "128": "img/crappyClippy_128x128.png",
+      "256": "img/crappyClippy_256x256.png",
+      "512": "img/crappyClippy_512x512.png"
     },
     "default_title": "Tab Buddy",
     "default_popup": "popup.html"
