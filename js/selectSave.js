@@ -31,23 +31,26 @@ function populateTabs() {
     }
     console.log(setName);
     var set = {
-      "name": setName,
-      "tabs": []
+        "name": setName,
+        "tabs": []
     };
     tabCount = win.tabs.length;
     var tabList = document.querySelector(".tabList");
     for (var i = 0; i < tabCount; i++) {
-      var tab = win.tabs[i];
+    	var tab = win.tabs[i];
       var li = document.createElement("li");
       li.setAttribute("class", "tab");
       li.setAttribute("url", tab.url);
       li.setAttribute("id", tab.id);
+      var img = document.createElement("img");
+      img.setAttribute("src", tab.favIconUrl);
+      img.setAttribute("height", "16");
+      li.appendChild(img);
       li.appendChild(document.createTextNode(tab.title));
       li.addEventListener('click', (e) => toggleSelected(e))
       tabList.appendChild(li);
     }
     console.log(set);
-
   }
 }
 
