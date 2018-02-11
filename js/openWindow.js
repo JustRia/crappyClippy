@@ -1,6 +1,4 @@
 listSets();
-var openButton = document.querySelector('button.open');
-openButton.addEventListener('click', open);
 var backButton = document.querySelector('div.home');
 backButton.addEventListener('click', function callback() {
   window.location.href = "../popup.html"
@@ -16,11 +14,8 @@ function append(parent, el) {
 
 function toggleSelected(e) {
   const li = e.target;
-  if (li.classList.contains("selected")) {
-    li.classList.remove("selected");
-  } else {
-    li.classList.add("selected");
-  }
+  li.classList.add("selected");
+  open();
 }
 
 function listSets() {
@@ -41,10 +36,10 @@ function listSets() {
       div.innerHTML = set.name;
       div.addEventListener('click', function(e) {
         items.selectedSet = set;
-        toggleSelected(e);
         chrome.storage.local.set(items, function() {
           console.log('Data successfully saved to the storage!');
         });
+        toggleSelected(e);
         setTimeout(200);
       });
       append(ul, div);
