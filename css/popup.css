@@ -35,7 +35,7 @@ div.setList {
   padding: 4px;
 }
 
-button.save {
+button {
   font-family: 'Comic Sans MS',cursive, sans-serif;
   font-size: 10pt;
   padding: 4px;
@@ -47,8 +47,8 @@ button.save {
   font-size: 10pt;
   list-style-type: none;
   list-style-position: inside;
-  margin: 8px 8px;
-  padding: 0px;
+  margin: 0px 0px;
+  padding: 8px 8px;
 }
 
 div.set {
@@ -67,4 +67,8 @@ div.set.selected {
 
 li.tab.selected {
   background-color: lightgray;
+}
+
+img {
+  padding: 0px 8px 0px 0px;
 }

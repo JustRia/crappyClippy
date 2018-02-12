@@ -8,6 +8,11 @@ var saveSelectButton = document.querySelector('div.select-save');
 saveButton.addEventListener('click', saveRedirect);
 saveSelectButton.addEventListener('click', selectSaveRedirect);
 
+var openButton = document.querySelector('div.open');
+openButton.addEventListener('click', openRedirect);
+var openWindowButton = document.querySelector('div.open-window');
+openWindowButton.addEventListener('click', openWindowRedirect);
+
 var removeButton = document.querySelector('div.remove');
 var editButton = document.querySelector('div.edit');
 removeButton.addEventListener('click', removeRedirect);
@@ -20,6 +25,14 @@ surprise.addEventListener('click', function() {
 
 function saveRedirect() {
   window.location.href = "../save.html"
+}
+
+function openRedirect() {
+  window.location.href = "../open.html"
+}
+
+function openWindowRedirect() {
+  window.location.href = "../openWindow.html"
 }
 
 function editRedirect() {
