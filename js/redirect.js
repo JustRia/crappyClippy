@@ -18,6 +18,9 @@ var editButton = document.querySelector('div.edit');
 removeButton.addEventListener('click', removeRedirect);
 editButton.addEventListener('click', editRedirect);
 
+var orderButton = document.querySelector('div.order');
+orderButton.addEventListener('click', orderRedirect);
+
 var surprise = document.querySelector('div.surprise');
 surprise.addEventListener('click', function() {
   window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
@@ -45,4 +48,8 @@ function removeRedirect() {
 
 function selectSaveRedirect() {
   window.location.href = "../selectSave.html"
+}
+
+function orderRedirect() {
+  window.location.href = "../order.html"
 }
