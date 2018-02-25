@@ -36,6 +36,29 @@ function drop(e) {
   console.log(data);
   console.log(e.target);
   e.target.parentNode.insertBefore(document.getElementById(data), e.target.nextSibling);
+  saveOrder();
+}
+
+function saveOrder() {
+  chrome.storage.local.get(null, function callback(items) {
+    console.log(items.data);
+    var setDivs = document.querySelector("div.setList").children;
+    var newSetList = [];
+    for (var i = 0; i < setDivs.length; i++) {
+      var setDiv = setDivs[i];
+      console.log(setDiv.id);
+      for (var j = 0; j < items.data.length; j++) {
+        if (setDiv.id == items.data[j].name) {
+          newSetList.push(items.data[j]);
+        }
+      }
+    }
+    console.log(newSetList);
+    items.data = newSetList;
+    chrome.storage.local.set(items, function() {
+      console.log('Data successfully saved to the storage!');
+    });
+  });
 }
 
 function listSets() {
