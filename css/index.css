@@ -1,7 +1,10 @@
 body {
-    background: url("../img/notebook_paper.jpg");
-    background-repeat: repeat-y;
+    background: url("../img/notebook_paper.jpg") no-repeat center center fixed;
     overflow:hidden;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 .title {
   display:block;
