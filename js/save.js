@@ -52,7 +52,26 @@ function save() {
     storage.get(null, function(items) {
       if (Object.keys(items).length > 0 && items.data) {
         // The data array already exists, add to it the new server and nickname
-        items.data.push(set);
+        var found = false;
+        for(var i = 0; i < items.data.length; i++) {
+          if (items.data[i].name == set.name) {
+            console.log("Found Duplicate");
+            found = true;
+            break;
+          }
+        }
+        if (!found) {
+          items.data.push(set);
+        }
+        else {
+          if (document.querySelector('div.exists-error') == null) {
+            var div = document.createElement('div');
+            div.setAttribute("class", "exists-error");
+            div.innerHTML = "\nA saved set already has this name. Change it pls.";
+            document.querySelector("div.content").appendChild(div);
+          }
+          return;
+        }
       } else {
         console.log("in here");
         // The data array doesn't exist yet, create it
@@ -63,10 +82,9 @@ function save() {
       chrome.storage.local.set(items, function() {
         console.log('Data successfully saved to the storage!');
       });
+      //Wait before going back to popup.html or else data won't be saved.
+      setTimeout(backHome, 200);
     });
-
-    //Wait before going back to popup.html or else data won't be saved.
-    setTimeout(backHome, 200);
   }
 
   function backHome() {
