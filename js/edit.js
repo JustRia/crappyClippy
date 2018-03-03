@@ -326,12 +326,12 @@ function orderSets() {
           console.log(tabLi.id);
           var tab = {
             title: tabLi.title,
-            url: tabLi.url,
+            url: String(tabLi.url),
             id: tabLi.id
           }
           newTabList.push(tab);
         }
-        console.log(newTabList);
+        alert(newTabList);
         var index = items.data.findIndex((e) => e.name === setToEdit.name);
         items.data[index].tabs = newTabList;
         chrome.storage.local.set(items, function() {
