@@ -20,7 +20,7 @@ function toggleSelected(e) {
 
 function listSets() {
   var ul = document.querySelector("div.setList");
-  chrome.storage.local.get(null, function callback(items) {
+  chrome.storage.sync.get(null, function callback(items) {
     console.log(items.data);
     if (items.data.length == 0 || items.data == null) {
       let div = createNode("div");
@@ -48,7 +48,7 @@ function listSets() {
 }
 
 function open() {
-  var storage = chrome.storage.local;
+  var storage = chrome.storage.sync;
   storage.get(null, function(items) {
     var setToOpen = items.data.filter((e) => e.name === items.selectedSet.name)[0];
     var tabCount = setToOpen.tabs.length;

@@ -20,7 +20,7 @@ function save() {
   }
 
   function getTabs(win) {
-    var storage = chrome.storage.local;
+    var storage = chrome.storage.sync;
     //window.open(chrome.extension.getURL("popup.html"), "gc-popout-window", "width=348,height=654")
     //var setName = window.prompt("Rename your tab set if you want", "My Tab Set");
     setName = document.querySelector("input#setName").value;
@@ -54,7 +54,7 @@ function save() {
       }
       console.log(items);
       // Now save the updated items using set
-      chrome.storage.local.set(items, function() {
+      chrome.storage.sync.set(items, function() {
         console.log('Data successfully saved to the storage!');
       });
     });
