@@ -24,7 +24,13 @@ function save() {
     //window.open(chrome.extension.getURL("popup.html"), "gc-popout-window", "width=348,height=654")
     //var setName = window.prompt("Rename your tab set if you want", "My Tab Set");
     setName = document.querySelector("input#setName").value;
-    if (setName == null) {
+    if (setName == "") {
+      if (document.querySelector('div.error') == null) {
+        var div = document.createElement('div');
+        div.setAttribute("class", "error");
+        div.innerHTML = "Please input a name for your set";
+        document.querySelector("body").appendChild(div);
+      }
       return;
     }
     console.log(setName);
