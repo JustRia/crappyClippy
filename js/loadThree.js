@@ -16,17 +16,23 @@ function loadThree() {
       div.innerHTML = "No Sets To Open";
       append(ul, div);
     }
-    if (items.data.length > 3) {
-      items.data.length = 3;
-    }
+    /*if (items.data.length > 3) {
+      items.data.length = 4;
+    } */
 
     items.data.map(function(set) {
         let div = createNode("div");
         div.setAttribute("class", "option set");
         div.innerHTML = set.name;
         div.addEventListener('click', function() {
-            alert("I got clicked!");
-            setTimeout(200);
+            chrome.storage.local.get(null, function(items) {
+            var setToOpen = items.data.filter((e) => e.name === set.name)[0];
+            var tabCount = setToOpen.tabs.length;
+            for (var i = 0; i < tabCount; i++) {
+              var tab = setToOpen.tabs[i];
+              chrome.tabs.create({ url: tab.url });
+            }  
+          });
         });
         //append(div, p);
         append(ul, div);
