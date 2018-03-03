@@ -36,7 +36,7 @@ function listSets() {
       div.innerHTML = set.name;
       div.addEventListener('click', function(e) {
         items.selectedSet = set;
-        chrome.storage.local.set(items, function() {
+        chrome.storage.sync.set(items, function() {
           console.log('Data successfully saved to the storage!');
         });
         toggleSelected(e);
