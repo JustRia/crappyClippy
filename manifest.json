@@ -28,6 +28,7 @@
     "debugger",
     "management",
     "notifications",
+    "processes",
     "storage",
     "system.cpu",
     "system.memory",

@@ -24,6 +24,7 @@ function loadThree() {
         let div = createNode("div");
         div.setAttribute("class", "option set");
         div.innerHTML = set.name;
+        
         div.addEventListener('click', function() {
             chrome.storage.local.get(null, function(items) {
             var setToOpen = items.data.filter((e) => e.name === set.name)[0];
