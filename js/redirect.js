@@ -24,6 +24,58 @@ orderButton.addEventListener('click', orderRedirect);
 var sortButton = document.querySelector('div.sort');
 sortButton.addEventListener('click', sortRedirect);
 
+var separate = document.querySelector('div.separate');
+separate.addEventListener('click', function() {
+  chrome.windows.getCurrent(function(win)
+  {
+    chrome.tabs.getAllInWindow(win.id, function(tabs)
+    {
+      var tc = tabs.length;
+      sort();
+      function sort(){
+        tabs.sort(function(a, b) {
+          var urlA = a.url.toLowerCase();
+          var urlB = b.url.toLowerCase();
+          if (urlA < urlB) //sort string ascending
+            return -1;
+          if (urlA > urlB)
+            return 1;
+          return 0 //default return value (no sorting)
+        });
+      }
+      var prev = tabs[0].url;
+      var cur = null;
+      var j = 0;
+      var urls = [prev];
+      for (var i = 1; i < tc; i++){
+        if(urls[0]==null){
+          urls[0]=prev;
+        }
+        cur = tabs[i].url;
+        var curs = cur.split(".");
+        var prevs = prev.split(".");
+        if(curs[1]==prevs[1]){
+          j++;
+          urls[j]=cur;
+        }else{
+          chrome.windows.create({url: urls}, function() {
+        
+          });
+          urls = [];
+          j=0;
+        }
+        prev = cur;
+      }
+      urls[j]=cur;
+      chrome.windows.create({url: urls}, function() {
+      });
+    });
+    chrome.windows.remove(win.id, function() {
+        
+    });
+  });
+})
+
 var surprise = document.querySelector('div.surprise');
 surprise.addEventListener('click', function() {
   window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
