@@ -4,7 +4,12 @@ var backButton = document.querySelector('div.home');
 backButton.addEventListener('click', function callback() {
     window.location.href = "../popup.html"
 });
-
+var clearButton = document.querySelector('button.clear');
+clearButton.addEventListener('click', function callback() {
+    chrome.alarms.clearAll();
+    console.log("All Alarms Cleared")
+    setTimeout(backHome, 200);
+});
 function reminder() {
     var targetWindow = null;
     var tabCount = 0;
@@ -31,8 +36,7 @@ function reminder() {
         }
         setTimeout(backHome, 200);
     }
-
-    function backHome() {
-        window.location.href = "../popup.html"
-    }
+}
+function backHome() {
+    window.location.href = "../popup.html"
 }
