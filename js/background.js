@@ -3,10 +3,12 @@ chrome.alarms.onAlarm.addListener(function (alarm) {
         chrome.notifications.create(tab.id.toString(), {
             type: 'basic',
             iconUrl: '../img/crappyClippy_32x32.png',
-            title: 'Do you need this tab',
-            message: "This has been open for a while: " + tab.title,
+            title: 'Consider closing this tab:',
+            message: tab.title,
+            requireInteraction: true,
         }, function (notificationId) {
             console.log(notificationId + " displayed");
+            setTimeout(nothing, 200);
             return;
 
         });
