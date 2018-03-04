@@ -24,6 +24,9 @@ alertButton.addEventListener('click', alertRedirect);
 var orderButton = document.querySelector('div.order');
 orderButton.addEventListener('click', orderRedirect);
 
+var sortButton = document.querySelector('div.sort');
+sortButton.addEventListener('click', sortRedirect);
+
 var surprise = document.querySelector('div.surprise');
 surprise.addEventListener('click', function () {
   window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
@@ -55,6 +58,10 @@ function selectSaveRedirect() {
 
 function orderRedirect() {
   window.location.href = "../order.html"
+}
+
+function sortRedirect() {
+  window.location.href = "../sort.html"
 }
 
 function alertRedirect() {

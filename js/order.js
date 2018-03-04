@@ -5,15 +5,6 @@ backButton.addEventListener('click', function callback() {
 
 listSets();
 
-function toggleSelected(e) {
-  const li = e.target;
-  if (li.classList.contains("selected")) {
-    li.classList.remove("selected");
-  } else {
-    li.classList.add("selected");
-  }
-}
-
 function createNode(element) {
   return document.createElement(element);
 }
