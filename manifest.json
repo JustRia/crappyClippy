@@ -42,9 +42,12 @@
     "index.html",
     "popup.html"
   ],
-  "background": [
-    "js/alert.js"
-  ],
+  "background": {
+    "scripts": [
+      "js/background.js",
+      "js/alert.js"
+    ]
+  },
   "content_scripts": [
     {
       "matches": [
@@ -53,7 +56,8 @@
       ],
       "js": [
         "js/save.js",
-        "js/alert.js"
+        "js/alert.js",
+        "js/background.js"
       ]
     }
   ]
