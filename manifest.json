@@ -24,6 +24,7 @@
   "incognito": "not_allowed",
   "permissions": [
     "activeTab",
+    "alarms",
     "background",
     "debugger",
     "management",
@@ -43,6 +44,22 @@
     "popup.html"
   ],
   "background": {
-    "scripts": ["js/background.js"]
-  }
+    "scripts": [
+      "js/background.js",
+      "js/alert.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/save.js",
+        "js/alert.js",
+        "js/background.js"
+      ]
+    }
+  ]
 }

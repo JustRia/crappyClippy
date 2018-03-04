@@ -1,5 +1,5 @@
 //At very beginning, remove selectedSet and editType from storage
-chrome.storage.local.remove(["selectedSet", "editType"], function() {
+chrome.storage.local.remove(["selectedSet", "editType"], function () {
   console.log('Removed selectedSet and editType from local storage');
 });
 
@@ -18,6 +18,9 @@ var editButton = document.querySelector('div.edit');
 removeButton.addEventListener('click', removeRedirect);
 editButton.addEventListener('click', editRedirect);
 
+var alertButton = document.querySelector('div.alert');
+alertButton.addEventListener('click', alertRedirect);
+
 var orderButton = document.querySelector('div.order');
 orderButton.addEventListener('click', orderRedirect);
 
@@ -25,7 +28,7 @@ var sortButton = document.querySelector('div.sort');
 sortButton.addEventListener('click', sortRedirect);
 
 var surprise = document.querySelector('div.surprise');
-surprise.addEventListener('click', function() {
+surprise.addEventListener('click', function () {
   window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
 })
 
@@ -59,4 +62,8 @@ function orderRedirect() {
 
 function sortRedirect() {
   window.location.href = "../sort.html"
+}
+
+function alertRedirect() {
+  window.location.href = "../alert.html"
 }
