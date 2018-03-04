@@ -21,6 +21,9 @@ editButton.addEventListener('click', editRedirect);
 var orderButton = document.querySelector('div.order');
 orderButton.addEventListener('click', orderRedirect);
 
+var scheduleButton = document.querySelector('div.schedule');
+scheduleButton.addEventListener('click', scheduleRedirect);
+
 var sortButton = document.querySelector('div.sort');
 sortButton.addEventListener('click', sortRedirect);
 
@@ -107,6 +110,10 @@ function selectSaveRedirect() {
 
 function orderRedirect() {
   window.location.href = "../order.html"
+}
+
+function scheduleRedirect() {
+  window.location.href = "../schedule.html"
 }
 
 function sortRedirect() {

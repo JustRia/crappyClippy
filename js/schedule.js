@@ -1,0 +1,74 @@
+var backButton = document.querySelector('div.home');
+backButton.addEventListener('click', function callback() {
+    window.location.href = "../popup.html"
+});
+
+if(window.location.pathname === '/schedule.html'){
+    listSets();
+}
+
+function createNode(element) {
+  return document.createElement(element);
+}
+  
+function append(parent, el) {
+    return parent.appendChild(el);
+}
+  
+function toggleSelected(e) {
+    const li = e.target;
+    li.classList.add("selected");
+    sOpen();
+}
+  
+function listSets() {
+    var ul = document.querySelector("div.setList");
+    chrome.storage.local.get(null, function callback(items) {
+      console.log(items.data);
+      if (items.data.length == 0 || items.data == null) {
+        let div = createNode("div");
+        div.setAttribute("class", "set");
+        div.innerHTML = "No Sets Saved";
+        append(ul, div);
+        var button = document.querySelector("button.open");
+        button.setAttribute("hidden", true);
+      }
+      items.data.map(function(set) {
+        let div = createNode("div");
+        div.setAttribute("class", "option set");
+        div.innerHTML = set.name;
+        div.addEventListener('click', function(e) {
+          items.selectedSet = set;
+          chrome.storage.local.set(items, function() {
+            console.log('Data successfully saved to the storage!');
+          });
+          toggleSelected(e);
+          setTimeout(200);
+        });
+        append(ul, div);
+      });
+    })
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function sOpen(){
+    var wtime;
+    wtime = document.getElementById("sTime").value;
+    console.log(wtime);
+    wtimems = wtime *1000;
+    await sleep(wtimems);
+    console.log("Time to open");
+    var storage = chrome.storage.local;
+    storage.get(null, function(items) {
+        var setToOpen = items.data.filter((e) => e.name === items.selectedSet.name)[0];
+        var tabCount = setToOpen.tabs.length;
+        for (var i = 0; i < tabCount; i++) {
+            var tab = setToOpen.tabs[i];
+            chrome.tabs.create({ url: tab.url });
+        }
+    });
+
+}
