@@ -95,6 +95,15 @@ function save() {
         set.tabs.push(tab);
       }
     }
+    if (set.tabs.length == 0) {
+      if (document.querySelector('div.no-tabs-error') == null) {
+        var div = document.createElement('div');
+        div.setAttribute("class", "no-tabs-error");
+        div.innerHTML = "\nPlease select at least one tab to save";
+        document.querySelector("div.content").appendChild(div);
+      }
+      return;
+    }
     /*
     storage.set(set, function callback() {
         alert(set.tabs + " Saved");
