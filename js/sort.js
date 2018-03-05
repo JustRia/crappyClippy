@@ -65,15 +65,18 @@ function sort() {
       win.tabs.sort(function(a, b) {
         var urlA = a.url.toLowerCase();
         var urlB = b.url.toLowerCase();
-        if (urlA < urlB) //sort string ascending
+        var domainA = urlA.split("://")[1];
+        var domainB = urlB.split("://")[1];
+        console.log(domainA);
+        console.log(domainB);
+        if (domainA < domainB) //sort string ascending
           return -1;
-        if (urlA > urlB)
+        if (domainA > domainB)
           return 1;
         return 0 //default return value (no sorting)
       });
     }
     for (var i = 0; i < tabCount; i++) {
-      console.log(win.tabs[i]);
       win.tabs[i].index = i;
       chrome.tabs.move(win.tabs[i].id, {
         index: i
