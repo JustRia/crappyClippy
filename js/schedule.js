@@ -2,10 +2,7 @@ var backButton = document.querySelector('div.home');
 backButton.addEventListener('click', function callback() {
     window.location.href = "../popup.html"
 });
-
-if(window.location.pathname === '/schedule.html'){
-    listSets();
-}
+listSets();
 
 function createNode(element) {
   return document.createElement(element);
@@ -18,7 +15,8 @@ function append(parent, el) {
 function toggleSelected(e) {
     const li = e.target;
     li.classList.add("selected");
-    sOpen();
+    sOpen(document.getElementById("sTime").value);
+    //window.location.href = "../popup.html"
 }
   
 function listSets() {
@@ -48,27 +46,4 @@ function listSets() {
         append(ul, div);
       });
     })
-}
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-async function sOpen(){
-    var wtime;
-    wtime = document.getElementById("sTime").value;
-    console.log(wtime);
-    wtimems = wtime *1000;
-    await sleep(wtimems);
-    console.log("Time to open");
-    var storage = chrome.storage.local;
-    storage.get(null, function(items) {
-        var setToOpen = items.data.filter((e) => e.name === items.selectedSet.name)[0];
-        var tabCount = setToOpen.tabs.length;
-        for (var i = 0; i < tabCount; i++) {
-            var tab = setToOpen.tabs[i];
-            chrome.tabs.create({ url: tab.url });
-        }
-    });
-
 }
