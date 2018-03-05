@@ -14,7 +14,7 @@ function cpu() {
         div.innerHTML = ("Processor: "+ JSON.stringify(info.modelName));
         append(ul, div);
     });
-/*    const obj = {
+   const obj = {
         populate: true
     }
     chrome.windows.getCurrent(obj, function(win) {
@@ -26,13 +26,13 @@ function cpu() {
             });
         }    
     });
-    
+    /*I don't have Chromium-- do you?*/
     let div = createNode("div1");
     chrome.processes.getProcessInfo(currIDs, true, function(tabStuff) {
         for (var i = 0; i < currIDs.length; i++) {
             div.innerHTML = (tabStuff);
         }
     });
-    append(ul,div1); */
+    append(ul,div1); 
 
 }
