@@ -72,6 +72,27 @@ function removeTime(tabId, removeInfo) {
     setTimeout(nothing, 200);
 }
 
+async function sOpen(wtime){
+  console.log(wtime);
+  wtimems = wtime *1000;
+  await sleep(wtimems);
+  console.log("Time to open");
+  var storage = chrome.storage.local;
+  storage.get(null, function(items) {
+      var setToOpen = items.data.filter((e) => e.name === items.selectedSet.name)[0];
+      var tabCount = setToOpen.tabs.length;
+      for (var i = 0; i < tabCount; i++) {
+          var tab = setToOpen.tabs[i];
+          chrome.tabs.create({ url: tab.url });
+      }
+  });
+
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 function nothing() {
 
 }
