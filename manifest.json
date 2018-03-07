@@ -45,8 +45,7 @@
   ],
   "background": {
     "scripts": [
-      "js/background.js",
-      "js/alert.js"
+      "js/background.js"
     ]
   },
   "content_scripts": [

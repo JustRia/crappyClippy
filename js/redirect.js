@@ -18,8 +18,8 @@ var editButton = document.querySelector('div.edit');
 removeButton.addEventListener('click', removeRedirect);
 editButton.addEventListener('click', editRedirect);
 
-var alertButton = document.querySelector('div.alert');
-alertButton.addEventListener('click', alertRedirect);
+//var alertButton = document.querySelector('div.alert');
+//alertButton.addEventListener('click', alertRedirect);
 
 var orderButton = document.querySelector('div.order');
 orderButton.addEventListener('click', orderRedirect);
