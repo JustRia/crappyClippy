@@ -18,8 +18,8 @@ var editButton = document.querySelector('div.edit');
 removeButton.addEventListener('click', removeRedirect);
 editButton.addEventListener('click', editRedirect);
 
-//var alertButton = document.querySelector('div.alert');
-//alertButton.addEventListener('click', alertRedirect);
+var alertButton = document.querySelector('div.alert');
+alertButton.addEventListener('click', alertRedirect);
 
 var orderButton = document.querySelector('div.order');
 orderButton.addEventListener('click', orderRedirect);
@@ -31,15 +31,13 @@ var sortButton = document.querySelector('div.sort');
 sortButton.addEventListener('click', sortRedirect);
 
 var separate = document.querySelector('div.separate');
-separate.addEventListener('click', function() {
-  chrome.windows.getCurrent(function(win)
-  {
-    chrome.tabs.getAllInWindow(win.id, function(tabs)
-    {
+separate.addEventListener('click', function () {
+  chrome.windows.getCurrent(function (win) {
+    chrome.tabs.getAllInWindow(win.id, function (tabs) {
       var tc = tabs.length;
       sort();
-      function sort(){
-        tabs.sort(function(a, b) {
+      function sort() {
+        tabs.sort(function (a, b) {
           var urlA = a.url.toLowerCase();
           var urlB = b.url.toLowerCase();
           if (urlA < urlB) //sort string ascending
@@ -53,31 +51,31 @@ separate.addEventListener('click', function() {
       var cur = null;
       var j = 0;
       var urls = [prev];
-      for (var i = 1; i < tc; i++){
-        if(urls[0]==null){
-          urls[0]=prev;
+      for (var i = 1; i < tc; i++) {
+        if (urls[0] == null) {
+          urls[0] = prev;
         }
         cur = tabs[i].url;
         var curs = cur.split(".");
         var prevs = prev.split(".");
-        if(curs[1]==prevs[1]){
+        if (curs[1] == prevs[1]) {
           j++;
-          urls[j]=cur;
-        }else{
-          chrome.windows.create({url: urls}, function() {
-        
+          urls[j] = cur;
+        } else {
+          chrome.windows.create({ url: urls }, function () {
+
           });
           urls = [];
-          j=0;
+          j = 0;
         }
         prev = cur;
       }
-      urls[j]=cur;
-      chrome.windows.create({url: urls}, function() {
+      urls[j] = cur;
+      chrome.windows.create({ url: urls }, function () {
       });
     });
-    chrome.windows.remove(win.id, function() {
-        
+    chrome.windows.remove(win.id, function () {
+
     });
   });
 })
