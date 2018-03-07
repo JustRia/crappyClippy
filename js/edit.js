@@ -331,7 +331,6 @@ function orderSets() {
           }
           newTabList.push(tab);
         }
-        alert(newTabList);
         var index = items.data.findIndex((e) => e.name === setToEdit.name);
         items.data[index].tabs = newTabList;
         chrome.storage.local.set(items, function() {
