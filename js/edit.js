@@ -198,13 +198,11 @@ function addToSet() {
         var child;
         for (var i = 0; i < childCount; i++) {
           child = document.querySelector('div.tabList').children[i];
-          if (child.classList.contains("selected")) {
-            var tab = {
-              "title": child.textContent,
-              "url": child.getAttribute("url")
-            };
-            setToEdit.tabs.push(tab);
-          }
+          var tab = {
+            "title": child.textContent,
+            "url": child.getAttribute("url")
+          };
+          setToEdit.tabs.push(tab);
         }
         var index = items.data.findIndex((e) => e.name === setToEdit.name);
         items.data[index] = setToEdit;
