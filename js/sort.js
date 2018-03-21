@@ -65,10 +65,6 @@ function sort() {
       win.tabs.sort(function(a, b) {
         var urlA = a.url.toLowerCase();
         var urlB = b.url.toLowerCase();
-        var domainA = urlA.split("://")[1];
-        var domainB = urlB.split("://")[1];
-        console.log(domainA);
-        console.log(domainB);
         if (domainA < domainB) //sort string ascending
           return -1;
         if (domainA > domainB)
