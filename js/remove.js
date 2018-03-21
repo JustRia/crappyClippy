@@ -56,7 +56,7 @@ function remove() {
       for (var i = 0; i < setCount; i++) {
         var element = document.querySelector("div.setList").children[i];
         if (element.classList.contains("selected")) {
-          newData = newData.filter((e) => e.name !== element.textContent);
+          newData = newData.filter((e) => e.name == element.textContent);
           selected++;
         }
       }
