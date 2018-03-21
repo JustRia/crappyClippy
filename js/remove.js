@@ -63,7 +63,6 @@ function remove() {
       if (newData.length == 0 && selected == 0) {
         return;
       }
-      items.data = newData;
       console.log(items.data);
     } else {
       setTimeout(backHome, 200);
