@@ -18,7 +18,7 @@ function sortByTimeUpdated() {
       } catch (error) {
         console.log(error);
         console.log("Deleting " + tabsSorted[i]);
-        delete times[tabsSorted[i]];
+        delete tabsSorted[i];
       }
     }
     items.times = times;

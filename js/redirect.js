@@ -6,7 +6,7 @@ chrome.storage.local.remove(["selectedSet", "editType"], function () {
 var saveButton = document.querySelector('div.save');
 var saveSelectButton = document.querySelector('div.select-save');
 saveButton.addEventListener('click', saveRedirect);
-saveSelectButton.addEventListener('click', selectSaveRedirect);
+saveSelectButton.addEventListener('click', saveRedirect);
 
 var openButton = document.querySelector('div.open');
 openButton.addEventListener('click', openRedirect);
