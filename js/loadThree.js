@@ -36,7 +36,7 @@ function loadThree() {
           });
         });
         //append(div, p);
-        append(ul, div);
+        
     });
   })
 }

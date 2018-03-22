@@ -7,12 +7,10 @@ function cpu() {
     chrome.system.cpu.getInfo(function(info){
         
         let div1 = createNode("div");
-        div1.innerHTML = ("Architecture: " + JSON.stringify(info.archName));
-        append(ul,div1);
+        div1.innerHTML = ("Architecture: " + JSON.stringify(info.archname));
 
         let div = createNode("div");
-        div.innerHTML = ("Processor: "+ JSON.stringify(info.modelName));
-        append(ul, div);
+        div.innerHTML = ("Processor: "+ JSON.stringify(info.modelname));
     });
    const obj = {
         populate: true

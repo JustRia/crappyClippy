@@ -9,9 +9,5 @@ function mascot() {
             window.open("https://microsoft-edge.en.softonic.com/");
         }
         document.getElementById('clippy').src=pics[iter];
-        iter++;
-        if (iter == 4) {
-            iter = 0;  
-        }
     });
 }
