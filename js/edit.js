@@ -121,10 +121,8 @@ function editSetName() {
   append(body, button);
   button.addEventListener('click', function() {
     chrome.storage.local.get(null, function(items) {
-      var newData = items.data.filter((e) => e.name != items.selectedSet.name);
       items.selectedSet.name = input.value;
-      newData.push(items.selectedSet);
-      items.data = newData;
+      items.data.push(items.selectedSet);
       chrome.storage.local.set(items, function() {
         console.log('Data successfully saved to the storage!');
       });
@@ -179,8 +177,7 @@ function addToSet() {
             setToEdit.tabs.push(tab);
           }
         }
-        var index = items.data.findIndex((e) => e.name === setToEdit.name);
-        items.data[index] = setToEdit;
+        items.data.push(setToEdit);
         chrome.storage.local.set(items, function() {
           console.log('Data successfully saved to the storage!');
         });
@@ -198,14 +195,15 @@ function addToSet() {
         var child;
         for (var i = 0; i < childCount; i++) {
           child = document.querySelector('div.tabList').children[i];
-          var tab = {
-            "title": child.textContent,
-            "url": child.getAttribute("url")
-          };
-          setToEdit.tabs.push(tab);
+          if (child.tagName == 'LI') {
+            var tab = {
+              "title": child.textContent,
+              "url": child.getAttribute("url")
+            };
+            setToEdit.tabs.push(tab);
+          }
         }
-        var index = items.data.findIndex((e) => e.name === setToEdit.name);
-        items.data[index] = setToEdit;
+        items.data.push(setToEdit);
         chrome.storage.local.set(items, function() {
           console.log('Data successfully saved to the storage!');
         });
@@ -251,8 +249,7 @@ function removeFromSet() {
         items.data = items.data.filter((e) => e.name !== setToEdit.name);
         console.log(items.data);
       } else {
-        var index = items.data.findIndex((e) => e.name === setToEdit.name);
-        items.data[index] = setToEdit;
+        items.data.push(setToEdit);
       }
       chrome.storage.local.set(items, function() {
         console.log('Data successfully saved to the storage!');
