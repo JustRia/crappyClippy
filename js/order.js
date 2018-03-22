@@ -26,7 +26,7 @@ function drop(e) {
   var data = e.dataTransfer.getData("text");
   console.log(data);
   console.log(e.target);
-  e.target.parentNode.insertBefore(document.getElementById(data), e.target.nextSibling);
+  e.target.appendChild(document.getElementById(data));
   saveOrder();
 }
 

@@ -309,7 +309,6 @@ function orderSets() {
       li.addEventListener('dragover', (e) => allowDrop(e));
       li.addEventListener('drop', (e) => drop(e));
       li.appendChild(document.createTextNode(tab.title));
-      //li.addEventListener('click', (e) => toggleSelected(e))
       div.appendChild(li);
     }
     let button = createNode('button');
@@ -326,7 +325,7 @@ function orderSets() {
           console.log(tabLi.id);
           var tab = {
             title: tabLi.title,
-            url: String(tabLi.url),
+            url: tabLi.url,
             id: tabLi.id
           }
           newTabList.push(tab);
