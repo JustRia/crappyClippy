@@ -58,21 +58,21 @@ separate.addEventListener('click', function () {
         cur = tabs[i].url;
         var curs = cur.split(".");
         var prevs = prev.split(".");
-        if (curs[1] == prevs[1]) {
-          j++;
-          urls[j] = cur;
-        } else {
+        //if (curs[1] == prevs[1]) {
+          //j++;
+          //urls[j] = cur;
+        //} else {
           chrome.windows.create({ url: urls }, function () {
 
           });
           urls = [];
-          j = 0;
-        }
+          //j = 0;
+       // }
         prev = cur;
       }
-      urls[j] = cur;
-      chrome.windows.create({ url: urls }, function () {
-      });
+      //urls[j] = cur;
+      //chrome.windows.create({ url: urls }, function () {
+     // });
     });
     chrome.windows.remove(win.id, function () {
 

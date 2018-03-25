@@ -52,7 +52,7 @@ function open() {
   storage.get(null, function(items) {
     var setToOpen = items.data.filter((e) => e.name === items.selectedSet.name)[0];
     var tabCount = setToOpen.tabs.length;
-    for (var i = 0; i < tabCount; i++) {
+    for (var i = 1; i < tabCount; i++) {
       var tab = setToOpen.tabs[i];
       chrome.tabs.create({ url: tab.url });
     }
