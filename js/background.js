@@ -5,7 +5,7 @@ chrome.alarms.onAlarm.addListener(function (alarm) {
             iconUrl: '../img/crappyClippy_32x32.png',
             title: 'Consider closing this tab:',
             message: tab.title,
-            requireInteraction: true,
+
         }, function (notificationId) {
             console.log(notificationId + " displayed");
             setTimeout(nothing, 200);
@@ -18,17 +18,6 @@ chrome.alarms.onAlarm.addListener(function (alarm) {
 chrome.tabs.onRemoved.addListener(function (tab, removedInfo) {
     chrome.alarms.clear(tab.toString());
     console.log(tab + " alarm removed!");
-});
-chrome.tabs.onCreated.addListener(function (tab) {
-    chrome.alarms.getAll(function (alarms) {
-        if (alarms[0] != null) {
-            var period = alarms[0].periodInMinutes;
-            chrome.alarms.create(tab.id.toString(), { "delayInMinutes": period, "periodInMinutes": period });
-            console.log("Alarm set for: " + tab.id.toString() + "\nWith time: " + period + "min");
-        } else {
-            console.log("No alarms set");
-        }
-    });
 });
 
 chrome.tabs.onActivated.addListener(updateTimes);
@@ -72,25 +61,25 @@ function removeTime(tabId, removeInfo) {
     setTimeout(nothing, 200);
 }
 
-async function sOpen(wtime){
-  console.log(wtime);
-  wtimems = wtime *1000;
-  await sleep(wtimems);
-  console.log("Time to open");
-  var storage = chrome.storage.local;
-  storage.get(null, function(items) {
-      var setToOpen = items.data.filter((e) => e.name === items.selectedSet.name)[0];
-      var tabCount = setToOpen.tabs.length;
-      for (var i = 0; i < tabCount; i++) {
-          var tab = setToOpen.tabs[i];
-          chrome.tabs.create({ url: tab.url });
-      }
-  });
+async function sOpen(wtime) {
+    console.log(wtime);
+    wtimems = wtime * 1000;
+    await sleep(wtimems);
+    console.log("Time to open");
+    var storage = chrome.storage.local;
+    storage.get(null, function (items) {
+        var setToOpen = items.data.filter((e) => e.name === items.selectedSet.name)[0];
+        var tabCount = setToOpen.tabs.length;
+        for (var i = 0; i < tabCount; i++) {
+            var tab = setToOpen.tabs[i];
+            chrome.tabs.create({ url: tab.url });
+        }
+    });
 
 }
 
 function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 function nothing() {
