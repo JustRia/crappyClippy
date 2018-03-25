@@ -59,7 +59,7 @@ function open() {
             urls[i] = setToOpen.tabs[i].url;
         }
     }
-    chrome.windows.create({url: urls}, function() {
+    chrome.windows.create({url: urls[0]}, function() {
         
     });
     

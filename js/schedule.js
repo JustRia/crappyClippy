@@ -16,7 +16,7 @@ function toggleSelected(e) {
     const li = e.target;
     li.classList.add("selected");
     sOpen(document.getElementById("sTime").value);
-    //window.location.href = "../popup.html"
+    window.location.href = "../popup.html"
 }
   
 function listSets() {
