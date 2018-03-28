@@ -177,7 +177,8 @@ function addToSet() {
             setToEdit.tabs.push(tab);
           }
         }
-        items.data.push(setToEdit);
+        var index = items.data.findIndex((e) => e.name === setToEdit.name);
+        items.data[index] = setToEdit;
         chrome.storage.local.set(items, function() {
           console.log('Data successfully saved to the storage!');
         });
@@ -203,7 +204,8 @@ function addToSet() {
             setToEdit.tabs.push(tab);
           }
         }
-        items.data.push(setToEdit);
+        var index = items.data.findIndex((e) => e.name === setToEdit.name);
+        items.data[index] = setToEdit;
         chrome.storage.local.set(items, function() {
           console.log('Data successfully saved to the storage!');
         });
@@ -249,7 +251,8 @@ function removeFromSet() {
         items.data = items.data.filter((e) => e.name !== setToEdit.name);
         console.log(items.data);
       } else {
-        items.data.push(setToEdit);
+        var index = items.data.findIndex((e) => e.name === setToEdit.name);
+        items.data[index] = setToEdit;
       }
       chrome.storage.local.set(items, function() {
         console.log('Data successfully saved to the storage!');
