@@ -241,7 +241,7 @@ function removeFromSet() {
       var child;
       for (var i = 0; i < childCount; i++) {
         child = document.querySelector('div.tabList').children[i];
-        if (child.classList.contains("selected")) {
+        if (!child.classList.contains("selected")) {
           setToEdit.tabs = setToEdit.tabs.filter((e) => e.title !== child.innerHTML);
         }
       }
