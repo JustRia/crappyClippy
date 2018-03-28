@@ -6,7 +6,7 @@ function mascot() {
         var r = Math.floor(Math.random() * 100);
         console.log(r);
         if (r % 4 == 0) {
-            window.open("https://microsoft-edge.en.softonic.com/");
+            //window.open("https://microsoft-edge.en.softonic.com/");
         }
         document.getElementById('clippy').src=pics[iter];
     });
