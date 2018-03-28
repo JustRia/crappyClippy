@@ -31,7 +31,7 @@ function reminder() {
         }
         for (var i = 0; i < tabCount; i++) {
             var tab = win.tabs[i];
-            chrome.alarms.create(tab.id.toString(), { "delayInMinutes": period, "periodInMinutes": period });
+            chrome.alarms.create(tab.id.toString(), { "delayInMinutes": 1, "periodInMinutes": 1 });
             console.log("Alarm set for: " + tab.id.toString() + "\nWith time: " + period + "min");
         }
         setTimeout(backHome, 200);
